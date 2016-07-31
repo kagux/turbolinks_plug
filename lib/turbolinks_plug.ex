@@ -1,0 +1,2 @@
+defmodule TurbolinksPlug do
+end
