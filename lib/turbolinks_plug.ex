@@ -13,7 +13,7 @@ defmodule TurbolinksPlug do
 
   def handle_redirect(%Plug.Conn{status: s} = conn) when s == 301 or s == 302 do
     location = get_resp_header(conn, "location") |> hd
-    referrer = get_resp_header(conn, @referrer_header)
+    referrer = get_req_header(conn, @referrer_header)
     store_location_in_session(conn, location, referrer)
   end
 
@@ -25,7 +25,7 @@ defmodule TurbolinksPlug do
 
   def handle_redirect(conn), do: conn
 
-  defp store_location_in_session(conn, _, nil), do: conn
+  defp store_location_in_session(conn, _, []), do: conn
 
   defp store_location_in_session(conn, location, _referrer) do
     put_session(conn, @session_key, location)
