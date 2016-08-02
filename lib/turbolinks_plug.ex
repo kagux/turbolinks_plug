@@ -2,7 +2,7 @@ defmodule TurbolinksPlug do
   import Plug.Conn
 
   @session_key "_turbolinks_location"
-  @location_header "Turbolinks-Location"
+  @location_header "turbolinks-location"
   @referrer_header "turbolinks-referrer"
 
   def init(opts), do: opts
@@ -12,7 +12,7 @@ defmodule TurbolinksPlug do
   end
 
   def handle_redirect(%Plug.Conn{status: s} = conn) when s == 301 or s == 302 do
-    location = get_resp_header(conn, "location")
+    location = get_resp_header(conn, "location") |> hd
     referrer = get_resp_header(conn, @referrer_header)
     store_location_in_session(conn, location, referrer)
   end
@@ -20,7 +20,6 @@ defmodule TurbolinksPlug do
   def handle_redirect(%Plug.Conn{status: s} = conn) when s >= 200 and s < 300  do
     conn
      |> get_session(@session_key)
-     |> hd
      |> set_location_header(conn)
   end
 
