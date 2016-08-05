@@ -1,6 +1,6 @@
 # TurbolinksPlug
 
-This plug integrates turbolinks into your phoenix application.
+This plug integrates [turbolinks](https://github.com/turbolinks/turbolinks) into your phoenix application.
 Because turbolinks makes an xhr requests it cannot update browser URL on redirects without help from backend.
 And that's exactly what this plug does. After each redirect initiated by turbolinks it sets `Turbolinks-Location` header to hint url.
 
