@@ -25,14 +25,14 @@ defmodule TurbolinksPlug do
 
   def handle_redirect(conn), do: conn
 
-  defp store_location_in_session(conn, _, []), do: conn
+  defp store_location_in_session(conn, _location, []), do: conn
 
   defp store_location_in_session(conn, location, _referrer) do
     put_session(conn, @session_key, location)
   end
 
   defp set_location_header(nil, conn), do: conn
-  
+
   defp set_location_header(location, conn) do
     conn 
       |> put_resp_header(@location_header, location) 
