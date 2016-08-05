@@ -1,10 +1,10 @@
 # TurbolinksPlug
 
-**TODO: Add description**
+This plug integrates turbolinks into your phoenix application.
+Because turbolinks makes an xhr requests it cannot update browser URL on redirects without help from backend.
+And that's exactly what this plug does. After each redirect initiated by turbolinks it sets `Turbolinks-Location` header to hint url.
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
   1. Add `turbolinks_plug` to your list of dependencies in `mix.exs`:
 
@@ -14,11 +14,10 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     end
     ```
 
-  2. Ensure `turbolinks_plug` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:turbolinks_plug]]
+  2. Add plug to your pipeline in `web/router.ex`
+  ```elixir
+    pipeline :browser do
+      ...
+      plug TurbolinksPlug
     end
-    ```
-
+  ```
