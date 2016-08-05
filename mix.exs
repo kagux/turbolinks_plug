@@ -23,7 +23,8 @@ defmodule TurbolinksPlug.Mixfile do
 
   defp deps do
     [
-      {:plug, "~> 1.1"}
+      {:plug, "~> 1.1"},
+      {:ex_doc, "~> 0.13"}
     ]
   end
 
