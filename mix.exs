@@ -8,9 +8,9 @@ defmodule TurbolinksPlug.Mixfile do
       elixir: "~> 1.3",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      deps: deps,
-      package: package,
-      description: description,
+      deps: deps(),
+      package: package(),
+      description: description(),
       docs: [
         extras: ~W(README.md)
       ]
@@ -18,13 +18,13 @@ defmodule TurbolinksPlug.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :plug]]
   end
 
   defp deps do
     [
-      {:plug, "~> 1.1"},
-      {:ex_doc, "~> 0.13"}
+      {:plug, "~> 1.5"},
+      {:ex_doc, "~> 0.18"}
     ]
   end
 
